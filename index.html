@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luton Macus</title>
+    <style>
+        img{
+            border-radius: 100%;
+            padding: 10px;
+        }
+        .head{
+       
+            padding:2px ;
+            
+            
+        }
+        body {
+            background-color: bisque;
+        }
+        h1 {
+            padding: 5px;
+        }
+        section {
+            display: flex;
+            gap: 50px;
+            padding: 10px;
+        }
+        a{
+            text-decoration: none;
+            border-radius: 5px;
+            background-color: black;
+            padding: 10px;
+        }
+        .repo {
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header class="head">
+        <h1 data-testid="slackUserName"> Gideon Owadara</h1></header>
+    <main>
+        <img src="./93ABCE58-7180-4D53-992A-C1A74BFF73B7.jpeg" alt="lutonmacus" width="200" height="200" data-testid="slackDisplayImage">
+        <div>
+            <section>
+                <article>
+                    <p>Day</p>
+                    <p data-testid="currentDayOfTheWeek"></p>
+                </article>
+                <article>
+                    <p>Current UTC</p>
+                    <p data-testid="currentUTCTime"></p>
+                </article>
+                <article>
+                    <p>My Track</p>
+                    <p data-testid="myTrack"></p>
+                </article>
+            </section>
+            <div class="repo">
+                <a href="">GitHub Repo Address</a>
+            </div>
+        </div>
+    </main>
+    <script>
+
+       document.querySelector('[data-testid="myTrack"]').textContent = 'FrontEnd'
+
+        
+        const realDay = document.querySelector('[data-testid="currentDayOfTheWeek"]')
+       const currentUtC = document.querySelector('[data-testid="currentUTCTime"]')
+         
+         
+        const time = ()=> {
+            let day; 
+            switch (new Date().getDay()) {
+                case 0:
+                    day = "Sunday"
+                    break;
+                case 1:
+                    day = "Monday"
+                    break;
+                case 2:
+                    day = "Tuesday"
+                    break;
+                case 3:
+                    day = "Wednesday"
+                    break;
+                case 4:
+                    day = "Thursday"
+                    break;
+                case 5:
+                    day = "Friday"
+                    break;
+                case 6:
+                    day = "Saturday"
+                    break;
+
+
+                
+                  
+                    }
+                    return day
+                }
+                realDay.innerHTML = time()
+
+                const realUTC = ()=> {
+                    const currentTime = new Date()
+                    const currentHrs = currentTime.getHours()
+                    const currentMin = currentTime.getMinutes()
+                    const currentSec = currentTime.getSeconds()
+                    const currentMill = currentTime.getMilliseconds()
+                    const realTimeNow = `${currentHrs}:${currentMin}: ${currentSec}: ${currentMill}`;
+                    
+                    return realTimeNow
+                  
+                    
+                     
+                } 
+               const updateUTCTime = ()=> {
+                currentUtC.textContent = realUTC()
+                setTimeout(updateUTCTime, 1000)
+               };
+               updateUTCTime()
+            
+
+               
+    </script>
+</body>
+</html>
