@@ -3,128 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luton Macus</title>
+    <title>My Frontend Page</title>
     <style>
-        img{
-            border-radius: 100%;
-            padding: 10px;
-        }
-        .head{
-       
-            padding:2px ;
-            
-            
-        }
         body {
-            background-color: bisque;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: green;
+            color: white;
         }
-        h1 {
-            padding: 5px;
-        }
-        section {
-            display: flex;
-            gap: 50px;
-            padding: 10px;
-        }
-        a{
-            text-decoration: none;
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
-            background-color: black;
-            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .repo {
-            padding-top: 30px;
+
+        .slack-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
+
+        .slack-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .info div {
+            flex: 1;
+        }
+
+        .day-of-week, .utc-time, .track {
+            font-size: 18px;
+        }
+
+        .github-link {
+    text-decoration: none;
+    color: gainsboro;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 2rem;
+    background: linear-gradient(to right, #0070c1, #00a5f6, #0070c1);
+    width: 100px;
+    font-weight: bold;
+    position: relative; 
+    overflow: hidden; 
+    transition: color 0.3s ease; 
+}
+
+.github-link::before,
+.github-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.github-link::before {
+    top: 0;
+    left: -100%; 
+    background-color: bisque; 
+    opacity: 0; 
+}
+
+
+.github-link::after {
+    bottom: 0;
+    right: -100%; 
+    background-color: bisque; 
+    opacity: 0; 
+}
+
+
+.github-link:hover::before {
+    transform: translateX(100%); 
+    opacity: 1; 
+}
+
+
+.github-link:hover::after {
+    transform: translateX(-100%); 
+    opacity: 1; 
+}
+
+
+.github-link:hover {
+    color: gainsboro;
+}
+
     </style>
 </head>
 <body>
-    <header class="head">
-        <h1 data-testid="slackUserName"> Gideon owa</h1></header>
-    <main>
-        <img src="./93ABCE58-7180-4D53-992A-C1A74BFF73B7.jpeg" alt="lutonmacus" width="200" height="200" data-testid="slackDisplayImage">
-        <div>
-            <section>
-                <article>
-                    <p>Day</p>
-                    <p data-testid="currentDayOfTheWeek"></p>
-                </article>
-                <article>
-                    <p>Current UTC</p>
-                    <p data-testid="currentUTCTime"></p>
-                </article>
-                <article>
-                    <p>My Track</p>
-                    <p data-testid="myTrack"></p>
-                </article>
-            </section>
-            <div class="repo">
-                <a href="https://github.com/Lutonmac/slack">GitHub Repo Address</a>
-            </div>
-        </div>
-    </main>
-    <script>
-
-       document.querySelector('[data-testid="myTrack"]').textContent = 'FrontEnd'
-
+    <div class="container">
+        <div data-testid="slackUserName" class="slack-name">I'm Gideon Owa </div>
         
-        const realDay = document.querySelector('[data-testid="currentDayOfTheWeek"]')
-       const currentUtC = document.querySelector('[data-testid="currentUTCTime"]')
-         
-         
-        const time = ()=> {
-            let day; 
-            switch (new Date().getDay()) {
-                case 0:
-                    day = "Sunday"
-                    break;
-                case 1:
-                    day = "Monday"
-                    break;
-                case 2:
-                    day = "Tuesday"
-                    break;
-                case 3:
-                    day = "Wednesday"
-                    break;
-                case 4:
-                    day = "Thursday"
-                    break;
-                case 5:
-                    day = "Friday"
-                    break;
-                case 6:
-                    day = "Saturday"
-                    break;
+        <img src="./93ABCE58-7180-4D53-992A-C1A74BFF73B7.jpeg" alt="dinma" data-testid="slackDisplayImage" class="slack-picture">
+        
+        <div class="info">
+            <div data-testid="currentDayOfTheWeek" class="day-of-week"></div>
+            <div data-testid="currentUTCTime" class="utc-time"></div>
+            <div data-testid="myTrack" class="track">Frontend</div>
+        </div>
+        
+        <a href="https://github.com/Lutonmac/slack" data-testid="githubURL" class="github-link">GitHub Repository</a>
+    </div>
+    <script>
+        function updateDateTime() {
+            const dayOfWeekElement = document.querySelector('[data-testid="currentDayOfTheWeek"]');
+            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const currentDate = new Date();
+            const currentDay = daysOfWeek[currentDate.getDay()];
+            dayOfWeekElement.textContent = `Day: ${currentDay}`;
 
+            const utcTimeElement = document.querySelector('[data-testid="currentUTCTime"]');
+            const hours = currentDate.getUTCHours();
+            const minutes = currentDate.getUTCMinutes();
+            const seconds = currentDate.getUTCSeconds();
+            const milliseconds = currentDate.getUTCMilliseconds();
+            utcTimeElement.textContent = `Current UTC Time: ${hours}:${minutes}:${seconds}.${milliseconds}`;
+        }
 
-                
-                  
-                    }
-                    return day
-                }
-                realDay.innerHTML = time()
-
-                const realUTC = ()=> {
-                    const currentTime = new Date()
-                    const currentHrs = currentTime.getHours()
-                    const currentMin = currentTime.getMinutes()
-                    const currentSec = currentTime.getSeconds()
-                    const currentMill = currentTime.getMilliseconds()
-                    const realTimeNow = `${currentHrs}:${currentMin}: ${currentSec}: ${currentMill}`;
-                    
-                    return realTimeNow
-                  
-                    
-                     
-                } 
-               const updateUTCTime = ()=> {
-                currentUtC.textContent = realUTC()
-                setTimeout(updateUTCTime, 100)
-               };
-               updateUTCTime()
-            
-
-               
+        document.addEventListener("DOMContentLoaded", function () {
+            updateDateTime();
+            setInterval(updateDateTime, 1);
+        });
     </script>
+
+
 </body>
 </html>
